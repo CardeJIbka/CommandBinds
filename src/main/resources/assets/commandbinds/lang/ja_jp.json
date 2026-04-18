@@ -1,0 +1,16 @@
+{
+  "screen.commandbinds.title":       "Command Binds",
+  "screen.commandbinds.input_label": "テキストまたは /コマンド：",
+  "screen.commandbinds.text_hint":   "テキストまたは /コマンドを入力...",
+  "screen.commandbinds.pick_key":    "[ キーを選択 ]",
+  "screen.commandbinds.add":         "追加",
+  "screen.commandbinds.close":       "閉じる",
+  "screen.commandbinds.delete":      "✗ 削除",
+  "screen.commandbinds.empty":       "バインドがありません。上から追加してください！",
+
+  "screen.commandbinds.capture_title": "バインドするキーを押してください...",
+  "screen.commandbinds.capture_hint":  "Escape でキャンセル",
+
+  "key.commandbinds.openmenu":    "Command Binds を開く",
+  "key.category.commandbinds":    "Command Binds"
+}

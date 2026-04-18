@@ -1,0 +1,16 @@
+{
+  "screen.commandbinds.title":       "Command Binds",
+  "screen.commandbinds.input_label": "Текст або /команда:",
+  "screen.commandbinds.text_hint":   "Введіть текст або /команду...",
+  "screen.commandbinds.pick_key":    "[ Обрати клавішу ]",
+  "screen.commandbinds.add":         "Додати",
+  "screen.commandbinds.close":       "Закрити",
+  "screen.commandbinds.delete":      "✗ Видалити",
+  "screen.commandbinds.empty":       "Біндів поки немає. Додайте вище!",
+
+  "screen.commandbinds.capture_title": "Натисніть будь-яку клавішу для бінду...",
+  "screen.commandbinds.capture_hint":  "Escape — скасування",
+
+  "key.commandbinds.openmenu":    "Відкрити Command Binds",
+  "key.category.commandbinds":    "Command Binds"
+}

@@ -1,0 +1,16 @@
+{
+  "screen.commandbinds.title":       "Command Binds",
+  "screen.commandbinds.input_label": "Текст или /команда:",
+  "screen.commandbinds.text_hint":   "Введите текст или /команду...",
+  "screen.commandbinds.pick_key":    "[ Выбрать клавишу ]",
+  "screen.commandbinds.add":         "Добавить",
+  "screen.commandbinds.close":       "Закрыть",
+  "screen.commandbinds.delete":      "✗ Удалить",
+  "screen.commandbinds.empty":       "Биндов пока нет. Добавьте выше!",
+
+  "screen.commandbinds.capture_title": "Нажмите любую клавишу для бинда...",
+  "screen.commandbinds.capture_hint":  "Escape — отмена",
+
+  "key.commandbinds.openmenu":    "Открыть Command Binds",
+  "key.category.commandbinds":    "Command Binds"
+}

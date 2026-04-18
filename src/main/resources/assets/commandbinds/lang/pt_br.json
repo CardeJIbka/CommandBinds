@@ -1,0 +1,16 @@
+{
+  "screen.commandbinds.title":       "Command Binds",
+  "screen.commandbinds.input_label": "Texto ou /comando:",
+  "screen.commandbinds.text_hint":   "Digite texto ou /comando...",
+  "screen.commandbinds.pick_key":    "[ Escolher tecla ]",
+  "screen.commandbinds.add":         "Adicionar",
+  "screen.commandbinds.close":       "Fechar",
+  "screen.commandbinds.delete":      "✗ Excluir",
+  "screen.commandbinds.empty":       "Nenhum bind ainda. Adicione um acima!",
+
+  "screen.commandbinds.capture_title": "Pressione qualquer tecla para vincular...",
+  "screen.commandbinds.capture_hint":  "Escape para cancelar",
+
+  "key.commandbinds.openmenu":    "Abrir Command Binds",
+  "key.category.commandbinds":    "Command Binds"
+}

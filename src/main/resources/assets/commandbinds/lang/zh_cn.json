@@ -1,0 +1,16 @@
+{
+  "screen.commandbinds.title":       "Command Binds",
+  "screen.commandbinds.input_label": "文本或 /命令：",
+  "screen.commandbinds.text_hint":   "输入文本或 /命令...",
+  "screen.commandbinds.pick_key":    "[ 选择按键 ]",
+  "screen.commandbinds.add":         "添加",
+  "screen.commandbinds.close":       "关闭",
+  "screen.commandbinds.delete":      "✗ 删除",
+  "screen.commandbinds.empty":       "还没有绑定。在上方添加一个吧！",
+
+  "screen.commandbinds.capture_title": "按下任意键进行绑定...",
+  "screen.commandbinds.capture_hint":  "按 Escape 取消",
+
+  "key.commandbinds.openmenu":    "打开 Command Binds",
+  "key.category.commandbinds":    "Command Binds"
+}
