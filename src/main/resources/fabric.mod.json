@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "commandbinds",
-  "version": "1.0.0",
+  "version": "${version}",
   "name": "Command Binds",
   "description": "Bind any key to a command or chat message — trigger it with one keypress",
   "authors": [
@@ -21,7 +21,7 @@
   "mixins": [],
   "depends": {
     "fabricloader": ">=0.16.0",
-    "minecraft": ">=1.21 <=1.21.5",
+    "minecraft": ">=1.21.6 <=1.21.8",
     "java": ">=21",
     "fabric-api": "*"
   }
