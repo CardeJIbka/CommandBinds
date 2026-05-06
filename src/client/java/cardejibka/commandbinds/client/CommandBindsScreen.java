@@ -3,9 +3,11 @@ package cardejibka.commandbinds.client;
 import cardejibka.commandbinds.CommandBind;
 import cardejibka.commandbinds.CommandBindsConfig;
 import com.mojang.blaze3d.platform.InputConstants;
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 
 import java.util.ArrayList;
@@ -126,7 +128,8 @@ public class CommandBindsScreen extends Screen {
     }
 
     private Component buildRowLabel(CommandBind bind) {
-        String keyName = InputConstants.getKey(bind.keyCode(), 0).getDisplayName().getString();
+        String keyName = InputConstants.Type.KEYSYM.getOrCreate(bind.keyCode())
+                .getDisplayName().getString();
         String icon    = bind.isCommand() ? "§a/§r" : "§7T§r";
         return Component.literal(
                 String.format("§e[%s]§r  %s  §f%s", keyName, icon, bind.displayText())
@@ -137,7 +140,8 @@ public class CommandBindsScreen extends Screen {
         if (pendingKeyCode < 0) {
             return Component.translatable("screen.commandbinds.pick_key");
         }
-        String name = InputConstants.getKey(pendingKeyCode, 0).getDisplayName().getString();
+        String name = InputConstants.Type.KEYSYM.getOrCreate(pendingKeyCode)
+                .getDisplayName().getString();
         return Component.literal("§a" + name);
     }
 
@@ -195,7 +199,13 @@ public class CommandBindsScreen extends Screen {
         int clipBottom = height - 50;
 
         graphics.fill(panelL + 4, clipTop, panelR - 4, clipBottom, 0xA0111111);
-        graphics.renderOutline(panelL + 4, clipTop, PANEL_WIDTH - 8, clipBottom - clipTop, 0x60FFFFFF);
+
+        int ol = panelL + 4, ot = clipTop, or_ = panelR - 4, ob = clipBottom;
+        int oc = 0x60FFFFFF;
+        graphics.fill(ol,      ot,     or_,  ot + 1, oc);
+        graphics.fill(ol,      ob - 1, or_,  ob,     oc);
+        graphics.fill(ol,      ot,     ol + 1, ob,   oc);
+        graphics.fill(or_ - 1, ot,     or_,  ob,     oc);
 
         if (editButtons.isEmpty()) {
             graphics.drawCenteredString(minecraft.font,
@@ -252,8 +262,12 @@ public class CommandBindsScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (super.mouseClicked(mouseX, mouseY, button)) return true;
+    public boolean mouseClicked(MouseButtonEvent event, boolean alreadyHandled) {
+        if (alreadyHandled) return false;
+        if (super.mouseClicked(event, false)) return true;
+
+        double mouseX = event.x();
+        double mouseY = event.y();
 
         int clipTop    = LIST_START_Y - LIST_PADDING;
         int clipBottom = height - 50;
@@ -262,10 +276,16 @@ public class CommandBindsScreen extends Screen {
         double adjY = mouseY + scrollOffset;
 
         for (ModernButton btn : deleteButtons) {
-            if (isButtonHit(btn, mouseX, adjY)) { btn.onPress(); return true; }
+            if (isButtonHit(btn, mouseX, adjY)) {
+                btn.onClick(event, false);
+                return true;
+            }
         }
         for (ModernButton btn : editButtons) {
-            if (isButtonHit(btn, mouseX, adjY)) { btn.onPress(); return true; }
+            if (isButtonHit(btn, mouseX, adjY)) {
+                btn.onClick(event, false);
+                return true;
+            }
         }
         return false;
     }
