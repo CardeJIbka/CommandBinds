@@ -8,7 +8,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.resources.ResourceLocation;
+
 import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
@@ -16,11 +16,6 @@ import java.util.List;
 public class CommandBindsClient implements ClientModInitializer {
 
     private static KeyMapping openMenuKey;
-
-    private static final KeyMapping.Category CATEGORY =
-            KeyMapping.Category.register(
-                    ResourceLocation.fromNamespaceAndPath("commandbinds", "commandbinds")
-            );
 
     @Override
     public void onInitializeClient() {
@@ -32,7 +27,7 @@ public class CommandBindsClient implements ClientModInitializer {
                 "key.commandbinds.openmenu",
                 InputConstants.Type.KEYSYM,
                 GLFW.GLFW_KEY_V,
-                CATEGORY
+                KeyMapping.Category.MISC
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {

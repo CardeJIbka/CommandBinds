@@ -29,8 +29,10 @@ public class ModernButton extends Button {
         return toggled;
     }
 
+    // 1.21.11: renderWidget — final в AbstractButton, вместо него renderContents.
+    // Рисуем фон + текст здесь полностью, перекрывая стандартный фон.
     @Override
-    public void renderWidget(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    public void renderContents(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         if (!this.visible) return;
 
         Minecraft mc = Minecraft.getInstance();
