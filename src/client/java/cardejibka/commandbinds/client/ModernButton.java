@@ -1,7 +1,7 @@
 package cardejibka.commandbinds.client;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
 
@@ -29,10 +29,8 @@ public class ModernButton extends Button {
         return toggled;
     }
 
-    // 1.21.11: renderWidget — final в AbstractButton, вместо него renderContents.
-    // Рисуем фон + текст здесь полностью, перекрывая стандартный фон.
     @Override
-    public void renderContents(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    protected void extractContents(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         if (!this.visible) return;
 
         Minecraft mc = Minecraft.getInstance();
@@ -59,9 +57,6 @@ public class ModernButton extends Button {
         int textColor = (isToggleButton && toggled) ? 0xFFCCFFCC : 0xFFFFFFFF;
         if (hovered) textColor = 0xFFFFFFDD;
 
-        int textX = getX() + (width  - mc.font.width(getMessage())) / 2;
-        int textY = getY() + (height - 8) / 2;
-
-        graphics.drawString(mc.font, getMessage(), textX, textY, textColor);
+        graphics.centeredText(mc.font, getMessage(), getX() + width / 2, getY() + (height - 8) / 2, textColor);
     }
 }

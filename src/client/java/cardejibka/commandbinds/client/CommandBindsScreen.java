@@ -4,7 +4,7 @@ import cardejibka.commandbinds.CommandBind;
 import cardejibka.commandbinds.CommandBindsConfig;
 import com.mojang.blaze3d.platform.InputConstants;
 
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -176,24 +176,19 @@ public class CommandBindsScreen extends Screen {
     }
 
     @Override
-    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         graphics.fill(0, 0, width, height, 0x88000000);
-    }
-
-    @Override
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(graphics, mouseX, mouseY, partialTick);
 
         int cx     = width / 2;
         int panelL = cx - PANEL_WIDTH / 2;
         int panelR = cx + PANEL_WIDTH / 2;
 
-        graphics.drawCenteredString(minecraft.font, title, cx, PANEL_MARGIN, 0xFFFFFFFF);
-        graphics.drawString(minecraft.font,
+        graphics.centeredText(minecraft.font, title, cx, PANEL_MARGIN, 0xFFFFFFFF);
+        graphics.text(minecraft.font,
                 Component.translatable("screen.commandbinds.input_label"),
                 panelL + 10, 48, 0xFFAAAAAA);
 
-        super.render(graphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(graphics, mouseX, mouseY, partialTick);
 
         int clipTop    = LIST_START_Y - LIST_PADDING;
         int clipBottom = height - 50;
@@ -208,7 +203,7 @@ public class CommandBindsScreen extends Screen {
         graphics.fill(or_ - 1, ot,     or_,  ob,     oc);
 
         if (editButtons.isEmpty()) {
-            graphics.drawCenteredString(minecraft.font,
+            graphics.centeredText(minecraft.font,
                     Component.translatable("screen.commandbinds.empty"),
                     cx, clipTop + (clipBottom - clipTop) / 2 - 4, 0xFF666666);
         }
@@ -232,11 +227,11 @@ public class CommandBindsScreen extends Screen {
             graphics.fill(panelL + 10, screenY, panelL + 14, screenY + ITEM_HEIGHT - 4, badgeColor);
 
             eBtn.setY(screenY);
-            eBtn.render(graphics, mouseX, adjustedMouseY, partialTick);
+            eBtn.extractRenderState(graphics, mouseX, adjustedMouseY, partialTick);
             eBtn.setY(screenY + scroll);
 
             dBtn.setY(screenY);
-            dBtn.render(graphics, mouseX, adjustedMouseY, partialTick);
+            dBtn.extractRenderState(graphics, mouseX, adjustedMouseY, partialTick);
             dBtn.setY(screenY + scroll);
         }
 
@@ -244,7 +239,7 @@ public class CommandBindsScreen extends Screen {
         renderScrollbar(graphics, panelR - 8, clipTop, 4, clipBottom - clipTop);
     }
 
-    private void renderScrollbar(GuiGraphics graphics, int x, int y, int w, int h) {
+    private void renderScrollbar(GuiGraphicsExtractor graphics, int x, int y, int w, int h) {
         double max = maxScroll();
         if (max <= 0) return;
         int thumbH = Math.max(20, (int) (h * h / (h + max)));
@@ -262,9 +257,8 @@ public class CommandBindsScreen extends Screen {
     }
 
     @Override
-    public boolean mouseClicked(MouseButtonEvent event, boolean alreadyHandled) {
-        if (alreadyHandled) return false;
-        if (super.mouseClicked(event, false)) return true;
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick) {
+        if (super.mouseClicked(event, doubleClick)) return true;
 
         double mouseX = event.x();
         double mouseY = event.y();
@@ -277,13 +271,13 @@ public class CommandBindsScreen extends Screen {
 
         for (ModernButton btn : deleteButtons) {
             if (isButtonHit(btn, mouseX, adjY)) {
-                btn.onClick(event, false);
+                btn.mouseClicked(event, doubleClick);
                 return true;
             }
         }
         for (ModernButton btn : editButtons) {
             if (isButtonHit(btn, mouseX, adjY)) {
-                btn.onClick(event, false);
+                btn.mouseClicked(event, doubleClick);
                 return true;
             }
         }
