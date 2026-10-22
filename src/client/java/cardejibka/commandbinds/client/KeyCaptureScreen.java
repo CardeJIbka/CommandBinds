@@ -34,11 +34,11 @@ public class KeyCaptureScreen extends Screen {
         for (int key = GLFW.GLFW_KEY_SPACE; key <= GLFW.GLFW_KEY_LAST; key++) {
             if (GLFW.glfwGetKey(handle, key) == GLFW.GLFW_PRESS) {
                 if (key == GLFW.GLFW_KEY_ESCAPE) {
-                    minecraft.setScreen(parent);
+                    minecraft.gui.setScreen(parent);
                     return;
                 }
                 callback.accept(key);
-                minecraft.setScreen(parent);
+                minecraft.gui.setScreen(parent);
                 return;
             }
         }

@@ -32,10 +32,10 @@ public class CommandBindsClient implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (openMenuKey.consumeClick()) {
-                client.setScreen(new CommandBindsScreen());
+                client.gui.setScreen(new CommandBindsScreen());
             }
 
-            if (client.screen != null || client.player == null) return;
+            if (client.gui.screen() != null || client.player == null) return;
 
             List<CommandBind> binds = CommandBindsConfig.getBinds();
             for (CommandBind bind : binds) {

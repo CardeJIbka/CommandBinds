@@ -64,7 +64,7 @@ public class CommandBindsScreen extends Screen {
                 keyButtonLabel(),
                 btn -> {
                     savedText = textField.getValue();
-                    minecraft.setScreen(new KeyCaptureScreen(this, code -> {
+                    minecraft.gui.setScreen(new KeyCaptureScreen(this, code -> {
                         pendingKeyCode = code;
                     }));
                 }
@@ -83,7 +83,7 @@ public class CommandBindsScreen extends Screen {
                 Component.translatable("screen.commandbinds.close"),
                 btn -> {
                     CommandBindsConfig.save();
-                    minecraft.setScreen(null);
+                    minecraft.gui.setScreen(null);
                 }
         ));
 
