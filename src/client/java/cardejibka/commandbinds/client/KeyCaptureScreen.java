@@ -1,9 +1,10 @@
 package cardejibka.commandbinds.client;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 
 import java.util.function.IntConsumer;
 
@@ -29,19 +30,17 @@ public class KeyCaptureScreen extends Screen {
     }
 
     @Override
-    public void tick() {
-        long handle = GLFW.glfwGetCurrentContext();
-        for (int key = GLFW.GLFW_KEY_SPACE; key <= GLFW.GLFW_KEY_LAST; key++) {
-            if (GLFW.glfwGetKey(handle, key) == GLFW.GLFW_PRESS) {
-                if (key == GLFW.GLFW_KEY_ESCAPE) {
-                    minecraft.gui.setScreen(parent);
-                    return;
-                }
-                callback.accept(key);
-                minecraft.gui.setScreen(parent);
-                return;
-            }
+    public boolean keyPressed(KeyEvent event) {
+        int key = event.key();
+
+        if (key == InputConstants.KEY_ESCAPE) {
+            minecraft.gui.setScreen(parent);
+            return true;
         }
+
+        callback.accept(key);
+        minecraft.gui.setScreen(parent);
+        return true;
     }
 
     @Override

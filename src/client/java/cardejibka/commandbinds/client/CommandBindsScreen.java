@@ -128,7 +128,7 @@ public class CommandBindsScreen extends Screen {
     }
 
     private Component buildRowLabel(CommandBind bind) {
-        String keyName = InputConstants.Type.KEYSYM.getOrCreate(bind.keyCode())
+        String keyName = InputConstants.Type.KEYBOARD.getOrCreate(bind.keyCode())
                 .getDisplayName().getString();
         String icon    = bind.isCommand() ? "§a/§r" : "§7T§r";
         return Component.literal(
@@ -140,7 +140,7 @@ public class CommandBindsScreen extends Screen {
         if (pendingKeyCode < 0) {
             return Component.translatable("screen.commandbinds.pick_key");
         }
-        String name = InputConstants.Type.KEYSYM.getOrCreate(pendingKeyCode)
+        String name = InputConstants.Type.KEYBOARD.getOrCreate(pendingKeyCode)
                 .getDisplayName().getString();
         return Component.literal("§a" + name);
     }

@@ -9,8 +9,6 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 
-import org.lwjgl.glfw.GLFW;
-
 import java.util.List;
 
 public class CommandBindsClient implements ClientModInitializer {
@@ -25,8 +23,8 @@ public class CommandBindsClient implements ClientModInitializer {
 
         openMenuKey = KeyMappingHelper.registerKeyMapping(new KeyMapping(
                 "key.commandbinds.openmenu",
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_V,
+                InputConstants.Type.KEYBOARD,
+                InputConstants.KEY_V,
                 KeyMapping.Category.MISC
         ));
 
@@ -39,8 +37,7 @@ public class CommandBindsClient implements ClientModInitializer {
 
             List<CommandBind> binds = CommandBindsConfig.getBinds();
             for (CommandBind bind : binds) {
-                boolean pressed = InputConstants.isKeyDown(
-                        client.getWindow(), bind.keyCode());
+                boolean pressed = InputConstants.isKeyDown(bind.keyCode());
 
                 if (pressed) {
                     if (KeyPressTracker.risingEdge(bind.keyCode())) {
